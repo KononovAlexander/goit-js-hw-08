@@ -12,12 +12,15 @@ if (dataStore) {
     }
     if (dataStore.hasOwnProperty("email") && !(dataStore.hasOwnProperty("message"))) {
         email.value = dataStore.email;
+        data.email = dataStore.email;
     }
 
     if (dataStore.hasOwnProperty("message") && !(dataStore.hasOwnProperty("email"))) {
         message.value = dataStore.message;
+        data.message = dataStore.message;
     }
 }
+
 feedbackForm.addEventListener('submit', (event) => {
     event.preventDefault();
     console.log('data: ', data);
@@ -26,7 +29,8 @@ feedbackForm.addEventListener('submit', (event) => {
     message.value = null;
     localStorage.clear();
     
- });
+});
+ 
 feedbackForm.addEventListener('input', throttle((event) => {
     event.preventDefault();
     let target = event.target;
@@ -36,7 +40,7 @@ feedbackForm.addEventListener('input', throttle((event) => {
     if (target === message) {
         data.message = message.value;
     }
-    localStorage.setItem('feedback-form-state', JSON.stringify(data));
+    localStorage.setItem('feedback-form-state', JSON.stringify(data));        
 
 }, 500)
     
